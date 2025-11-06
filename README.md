@@ -1,4 +1,4 @@
-# Assignment
+# Inheritance
 
 - [Reminders](#reminders)
   - [Asking ChatGPT for Help](#asking-chatgpt-for-help)
@@ -65,6 +65,10 @@ Short response questions can be found in the `src/short-response.md` file. Write
 
 ### Prompt 1
 
+In your own words, define what **inheritance** is in object-oriented programming. Then, explain what benefits it provides to developers who use it. Consider what problem it solves — what would be harder or messier without inheritance?
+
+### Prompt 2
+
 Consider these classes:
 
 ```js
@@ -85,7 +89,7 @@ const rex = new Puppy();
 
 Explain what happens when `rex.eat()` is invoked. In your answer, describe the role of **inheritance** and the **prototype chain**.
 
-### Prompt 2 
+### Prompt 3 
 
 Look at these classes:
 
@@ -112,46 +116,6 @@ class Manager extends Employee {
 ```
 
 Complete the `Manager` class by filling in the `constructor` and `getDetails` methods. Explain why you need to use `super` in each method and what would happen if you didn't use it.
-
-### Prompt 3
-
-Examine this code:
-
-```js
-class Shape {
-  constructor(type) {
-    this.type = type;
-  }
-  getArea() {
-    return 0;
-  }
-}
-
-class Circle extends Shape {
-  constructor(radius) {
-    super('circle');
-    this.radius = radius;
-  }
-  getArea() {
-    return Math.PI * this.radius ** 2;
-  }
-}
-
-class Square extends Shape {
-  constructor(side) {
-    super('square');
-    this.side = side;
-  }
-  getArea() {
-    return this.side ** 2;
-  }
-}
-
-const shapes = [new Circle(5), new Square(4), new Circle(3)];
-const totalArea = shapes.reduce((sum, shape) => sum + shape.getArea(), 0);
-```
-
-Explain how this code demonstrates **polymorphism**. Why can we call `getArea()` on each shape without checking what type of shape it is?
 
 ## From Scratch
 

@@ -9,10 +9,16 @@
   - [Prompt 2](#prompt-2)
   - [Prompt 3](#prompt-3)
 - [From Scratch](#from-scratch)
-  - [Question 1 - Quadrilateral](#question-1---quadrilateral)
-  - [Question 2 - Rectangle](#question-2---rectangle)
-  - [Question 3 - Square](#question-3---square)
-- [Design Challenge](#design-challenge)
+  - [Problem Set 1: Shapes](#problem-set-1-shapes)
+    - [Shape](#shape)
+    - [Circle](#circle)
+    - [Rectangle](#rectangle)
+    - [Square](#square)
+  - [Problem Set 2: Library System](#problem-set-2-library-system)
+    - [LibraryItem](#libraryitem)
+    - [Book](#book)
+    - [DVD](#dvd)
+    - [Magazine](#magazine)
 
 
 ## Reminders
@@ -119,35 +125,173 @@ Complete the `Manager` class by filling in the `constructor` and `getDetails` me
 
 ## From Scratch
 
-### Question 1 - Quadrilateral
+In these problem sets, you'll build a hierarchy of classes with inheritance. This will help you practice:
+- Using `extends` to create subclasses
+- Using `super()` to call parent constructors
+- Overriding methods to provide specific implementations
 
-Create a `Quadrilateral` class. Check the tests to see what arguments it's expecting and whether or not it has any methods on it.
+### Problem Set 1: Shapes
 
-### Question 2 - Rectangle
+#### Shape
 
-Now make a `Rectangle` class that inherits from the `Quadrilateral` class. Pay very careful attention to how the arguments for `Rectangle` differ from `Quadrilateral`. How should this class deal with its parent? Does it need any methods of its own or is it borrowing from the parent?
+Create a `Shape` class.
 
-### Question 3 - Square
+In the constructor:
+- Accept a `type` parameter
+- Store the `type` property
 
-Finally, make a `Square` class that inherits from...someone. Check the tests to see who the direct parent is, and what arguments `Square` takes on each instance.
+Define a `getArea` method that returns `0`.
 
-Now, there are some methods that square *should* add:
+Example Usage:
 
-- getPerimeter
-- getArea
-- getDiagonal
+```js
+const myShape = new Shape('blob');
+console.log(myShape.type); // blob
+console.log(myShape.getArea()); // 0
+```
 
-Hopefully you know how to get those things from the sides, but google or GPT is your friend here. Whenever you have a question, always think about where you're staring from (what do you know about the square) and where you're going (what are you trying to calculate).
+#### Circle
 
-## Design Challenge
+Now, create a `Circle` class that **extends `Shape`**. 
 
-Design a `Person` class.
+In the constructor:
+- Accept a `radius` parameter
+- Call the parent constructor with the type `'Circle'`
+- Store the `radius` property
 
-**Instance Properties / Methods**: An instance of `Person` should have three *or more* data properties which can be any type (string, number, boolean, array, object, etc.). Your `Person` class should have at least three **non-trivial** instance methods. For this assignment, a trivial method is one that either gets the data property or sets the data property to the parameter value. In other words, methods like `setName()` or `changeName()` or `get name()` will not be accepted.
+Override the `getArea()` method to calculate and return the area of the circle. The area of a circle can be calculated with the formula: `Math.PI * (radius ** 2)` or `Math.PI * radius * radius`.
 
-**Class Properties / Methods**: As for the *class* of Person, it should have a private variable to track each new instance, a `list` method that returns that variable, and a `find` method that allows you to look up a person by some attribute (you're choice).
+Example Usage:
 
-This design challenge is purposefully ambiguous and open-ended to encourage creativity. There are no tests, so you will be responsible for QAing the code yourself with the `playground.js` file. Basically just log stuff out.
+```js
+const myCircle = new Circle(10);
+console.log(myCircle.type); // Circle
+console.log(myCircle.radius); // 10
+console.log(myCircle.getArea()); // 314.15927....
+```
 
-...Though if you wanted to add some *literal* tests yourself in a new `person.spec.js`, who's gonna stop you?
-(don't add the scoring engine, just regular jest tests are fine).
+
+#### Rectangle
+
+Create a `Rectangle` class that **extends `Shape`**. 
+
+In the constructor:
+- Accept `length` and `width` parameters
+- Call the parent constructor with the type `'Rectangle'`
+- Store the `length` and `width` properties
+
+Override the `getArea()` method to calculate and return the area of the rectangle. The area of a rectangle is calculated by multiplying `length * width`.
+
+Example Usage:
+
+```js
+const myRectangle = new Rectangle(4, 3);
+console.log(myRectangle.type); // Rectangle
+console.log(myRectangle.length); // 4
+console.log(myRectangle.width); // 3
+console.log(myRectangle.getArea()); // 12
+```
+
+#### Square
+
+Finally, create a `Square` class that **extends `Rectangle`**. A square is a special rectangle where length and width are equal.
+
+In the constructor:
+- Accept a single `side` parameter
+- Call the parent constructor with `side` for both length and width
+- The type should be `'Square'` (you'll need to override it)
+
+Consider: do you need to override the `getArea` method?
+
+```js
+const mySquare = new Square(5);
+console.log(mySquare.type); // Square
+console.log(mySquare.length); // 5
+console.log(mySquare.width); // 5
+console.log(mySquare.getArea()); // 25
+```
+
+### Problem Set 2: Library System
+
+In this problem set, you'll practice using inheritance to build a hierarchy of library item classes.
+
+#### LibraryItem
+
+Create a `LibraryItem` class with:
+- A constructor that accepts `title` and `year` parameters and stores them as properties
+- A public field `isCheckedOut` with a default value of `false`
+- A `checkOut()` method that sets `isCheckedOut` to `true` and *returns* the string `"<title> has been checked out"`
+- A `returnItem()` method that sets `isCheckedOut` to `false` and *returns* the string `"<title> has been returned"`
+- A `getDescription()` method that returns the string `"<title> (<year>)"`
+
+Example Usage:
+
+```js
+const item = new LibraryItem('The Great Gatsby', 1925);
+console.log(item.title); // The Great Gatsby
+console.log(item.year); // 1925
+console.log(item.isCheckedOut); // false
+console.log(item.checkOut()); // The Great Gatsby has been checked out
+console.log(item.isCheckedOut); // true
+console.log(item.returnItem()); // The Great Gatsby has been returned
+console.log(item.isCheckedOut); // false
+console.log(item.getDescription()); // The Great Gatsby (1925)
+```
+
+#### Book
+
+Create a `Book` class that **extends `LibraryItem`**.
+
+Example Usage:
+
+In the constructor:
+- Accept `title`, `year`, `author`, and `pages` parameters
+- Call the parent constructor with `title` and `year`
+- Store the `author` and `pages` properties
+
+Override the `getDescription()` method to return a string in this format: `"<title> (<year>) by <author>, <pages> pages"`. Consider how you can use `super` to avoid duplicated code.
+
+You **don't need to override `checkOut()` or `returnItem()`** - they're inherited from `LibraryItem` and work correctly!
+
+Example Usage:
+
+```js
+const book = new Book('The Color Purple', 1982, 'Alice Walker', 295);
+console.log(book.title); // The Color Purple
+console.log(book.year); // 1982
+console.log(book.author); // Alice Walker
+console.log(book.pages); // 295
+console.log(book.getDescription()); // The Color Purple (1982) by Alice Walker, 295 pages
+console.log(book.checkOut()); // The Color Purple has been checked out
+console.log(book.isCheckedOut); // true
+```
+
+#### DVD
+
+Create a `DVD` class that **extends `LibraryItem`**.
+
+Look at the example usage below and implement the `DVD` class so that it produces the expected output:
+
+```js
+const dvd = new DVD('Inception', 2010, 'Christopher Nolan', 148);
+console.log(dvd.title); // Inception
+console.log(dvd.director); // Christopher Nolan
+console.log(dvd.runtime); // 148
+console.log(dvd.getDescription()); // Inception (2010) directed by Christopher Nolan, 148 min
+console.log(dvd.checkOut()); // Inception has been checked out
+console.log(dvd.isCheckedOut); // true
+```
+
+#### Magazine
+
+Create a `Magazine` class that **extends `LibraryItem`**.
+
+Look at the example usage below and implement the `Magazine` class so that it produces the expected output:
+```js
+const magazine = new Magazine('National Geographic', 2024, 5);
+console.log(magazine.title); // National Geographic
+console.log(magazine.issue); // 5
+console.log(magazine.getDescription()); // National Geographic (2024) Issue #5
+console.log(magazine.checkOut()); // National Geographic has been checked out
+console.log(magazine.returnItem()); // National Geographic has been returned
+```
